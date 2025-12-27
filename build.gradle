@@ -26,6 +26,7 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	implementation group: 'org.springframework.retry', name: 'spring-retry', version: '2.0.12'
 	implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.42'
+	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.20.1'
 }
 
 tasks.named('test') {
