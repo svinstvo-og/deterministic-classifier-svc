@@ -1,6 +1,6 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '4.0.0'
+	id 'org.springframework.boot' version '3.4.1'
 	id 'io.spring.dependency-management' version '1.1.7'
 }
 
@@ -10,7 +10,7 @@ description = 'Demo project for Spring Boot'
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(25)
+		languageVersion = JavaLanguageVersion.of(21)
 	}
 }
 
@@ -20,13 +20,15 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-	implementation 'org.springframework.boot:spring-boot-starter-kafka'
-	testImplementation 'org.springframework.boot:spring-boot-starter-data-redis-test'
-	testImplementation 'org.springframework.boot:spring-boot-starter-kafka-test'
+	implementation 'org.springframework.kafka:spring-kafka'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.kafka:spring-kafka-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
 	implementation group: 'org.springframework.retry', name: 'spring-retry', version: '2.0.12'
-	implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.42'
-	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.20.1'
+	implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.36'
 }
 
 tasks.named('test') {
