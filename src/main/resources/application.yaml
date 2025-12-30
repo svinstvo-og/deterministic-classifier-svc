@@ -2,6 +2,7 @@ spring:
   application:
     name: deterministic-clasifying-svc
 
+
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
@@ -9,3 +10,6 @@ spring:
       auto-offset-reset: earliest
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+server:
+  port: 8085
