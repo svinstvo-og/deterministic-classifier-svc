@@ -1,4 +1,7 @@
 .idea/
 build/
 .gradle/
+target/
+.claude/
+CLAUDE.md
 
