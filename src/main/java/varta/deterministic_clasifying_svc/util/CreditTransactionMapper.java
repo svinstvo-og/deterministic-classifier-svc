@@ -25,12 +25,12 @@ public class CreditTransactionMapper {
                     objectMapper.readValue(json, new TypeReference<DebeziumEnvelope<CreditTransactionDto>> () {});
             log.info(envelope.toString());
 
-            DebeziumPayload<CreditTransactionDto> payload = envelope.payload();
-            log.info(payload.toString());
-
-            if (payload == null) {
+            if (envelope.payload() == null) {
                 throw new IllegalStateException("Payload is null");
             }
+
+            DebeziumPayload<CreditTransactionDto> payload = envelope.payload();
+            log.info(payload.toString());
 
             CreditTransactionDto after = payload.after();
             if (after == null) {
