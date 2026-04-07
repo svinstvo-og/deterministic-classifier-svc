@@ -29,10 +29,15 @@ public class CreditTransactionMapper {
             log.info(payload.toString());
 
             if (payload == null) {
-                throw new IllegalStateException("No 'after' payload");
+                throw new IllegalStateException("Payload is null");
             }
 
-            return envelope.payload().after();
+            CreditTransactionDto after = payload.after();
+            if (after == null) {
+                throw new IllegalStateException("No 'after' field in payload — possibly a delete event");
+            }
+
+            return after;
 
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Failed to deserialize Debezium message: " + e);
