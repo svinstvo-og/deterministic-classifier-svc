@@ -67,6 +67,13 @@ public class RuleConfig {
     @Value("${rules.amount.micro-charge-max:1.00}")
     private double microChargeMax;
 
+    // S02 — Fan-Out Transfer Pattern
+    @Value("${rules.structuring.fan-out-distinct-destinations:3}")
+    private int fanOutDistinctDestinations;
+
+    @Value("${rules.structuring.fan-out-total-threshold:1000.0}")
+    private double fanOutTotalThreshold;
+
     // A06 — Amount Just Below Authentication Threshold
     @Value("${rules.amount.auth-threshold-low-min:45.00}")
     private double authThresholdLowMin;
@@ -101,4 +108,6 @@ public class RuleConfig {
     public double getAuthThresholdLowMax() { return authThresholdLowMax; }
     public double getAuthThresholdHighMin() { return authThresholdHighMin; }
     public double getAuthThresholdHighMax() { return authThresholdHighMax; }
+    public int getFanOutDistinctDestinations() { return fanOutDistinctDestinations; }
+    public double getFanOutTotalThreshold()    { return fanOutTotalThreshold; }
 }
