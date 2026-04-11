@@ -9,6 +9,7 @@ import varta.deterministic_clasifying_svc.dto.FlagReason;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,10 +24,17 @@ public class Transaction {
     private Boolean abnormal;
 
     private Boolean flaggedAbnormal;
-    private FlagReason flagReason;
+    private List<FlagReason> flagReasons;
 
+    private Long sourceCard;
     private Long destinationCard;
     private Long merchantAcquirer;
+
+    // Pre-computed enrichment fields from ingestion service
+    private Integer velocity1H;
+    private Integer velocity24H;
+    private Boolean isNight;
+    private Long secondsSinceLastTransaction;
 
     public static Transaction fromDto(CreditTransactionDto dto) {
         return new TransactionBuilder()
@@ -34,8 +42,13 @@ public class Transaction {
                 .processedAt(dto.processedAt())
                 .amount(dto.transactionAmount())
                 .abnormal(dto.abnormal())
+                .sourceCard(dto.sourceCard())
                 .destinationCard(dto.destinationCard())
                 .merchantAcquirer(dto.merchantAcquirer())
+                .velocity1H(dto.velocity1H())
+                .velocity24H(dto.velocity24H())
+                .isNight(dto.isNight())
+                .secondsSinceLastTransaction(dto.secondsSinceLastTransaction())
                 .build();
     }
 }

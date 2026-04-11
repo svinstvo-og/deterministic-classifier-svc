@@ -15,7 +15,8 @@ class TransactionTest {
         return new CreditTransactionDto(
                 id, "PAN-REF", false, 100L, 1, amount,
                 "COMP-KEY", processedAt, 0, 1, "desc",
-                1, 1, 0, abnormal, 0, 1L, destinationCard, merchantAcquirer, "c", 1000L
+                1, 1, 0, abnormal, 0, 1L, destinationCard, merchantAcquirer, "c", 1000L,
+                null, null, null, null  // enrichment fields: velocity1H, velocity24H, isNight, secondsSinceLastTransaction
         );
     }
 
@@ -48,14 +49,32 @@ class TransactionTest {
     }
 
     @Test
-    void fromDtoLeavesFlaggedAbnormalAndReasonNull() {
-        // fromDto() does not set flaggedAbnormal or flagReason — the classifier sets those later
+    void fromDtoLeavesFlaggedAbnormalAndReasonsNull() {
+        // fromDto() does not set flaggedAbnormal or flagReasons — the classifier sets those later
         CreditTransactionDto creditTransactionDto =
                 dto(1L, BigDecimal.ONE, LocalDateTime.now(), false, 1L, 1L);
 
         Transaction transaction = Transaction.fromDto(creditTransactionDto);
 
         assertNull(transaction.getFlaggedAbnormal());
-        assertNull(transaction.getFlagReason());
+        assertNull(transaction.getFlagReasons());
+    }
+
+    @Test
+    void fromDtoMapsEnrichmentFields() {
+        CreditTransactionDto dto = new CreditTransactionDto(
+                1L, "PAN-REF", false, 100L, 1, BigDecimal.TEN,
+                "COMP-KEY", LocalDateTime.now(), 0, 1, "desc",
+                1, 1, 0, false, 0, 42L, 5L, 7L, "c", 1000L,
+                3, 12, true, 45L
+        );
+
+        Transaction transaction = Transaction.fromDto(dto);
+
+        assertEquals(42L, transaction.getSourceCard());
+        assertEquals(3, transaction.getVelocity1H());
+        assertEquals(12, transaction.getVelocity24H());
+        assertTrue(transaction.getIsNight());
+        assertEquals(45L, transaction.getSecondsSinceLastTransaction());
     }
 }

@@ -43,5 +43,13 @@ public record CreditTransactionDto (
         @JsonProperty("merchant_acquirer")
         Long merchantAcquirer,
         String op,
-        Long ts_ms
+        Long ts_ms,
+        @JsonProperty("velocity_1h")
+        Integer velocity1H,
+        @JsonProperty("velocity_24h")
+        Integer velocity24H,
+        @JsonProperty("is_night")
+        Boolean isNight,
+        @JsonProperty("seconds_since_last_transaction")
+        Long secondsSinceLastTransaction
 ) { }
