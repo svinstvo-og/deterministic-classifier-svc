@@ -30,6 +30,8 @@ public class Transaction {
     private Long destinationCard;
     private Long merchantAcquirer;
 
+    private Boolean isTransfer;
+
     // Pre-computed enrichment fields from ingestion service
     private Integer velocity1H;
     private Integer velocity24H;
@@ -43,6 +45,7 @@ public class Transaction {
                 .processedAt(dto.processedAt())
                 .amount(dto.transactionAmount())
                 .abnormal(dto.abnormal())
+                .isTransfer(dto.isTransfer())
                 .sourceCard(dto.sourceCard())
                 .destinationCard(dto.destinationCard())
                 .merchantAcquirer(dto.merchantAcquirer())

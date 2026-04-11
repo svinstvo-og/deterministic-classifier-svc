@@ -32,6 +32,30 @@ public class RuleConfig {
     @Value("${rules.velocity.spike-min-30d-transactions:10}")
     private long velocitySpikeMin30DTransactions;
 
+    // T01 — Night Transaction (fallback when isNight is null)
+    @Value("${rules.time.night-start-hour:1}")
+    private int nightStartHour;
+
+    @Value("${rules.time.night-end-hour:5}")
+    private int nightEndHour;
+
+    // T02 — Rapid Sequential Transactions
+    @Value("${rules.time.rapid-sequential-high-seconds:30}")
+    private long rapidSequentialHighSeconds;
+
+    @Value("${rules.time.rapid-sequential-moderate-seconds:120}")
+    private long rapidSequentialModerateSeconds;
+
+    // T03 — Dormant Card Reactivation
+    @Value("${rules.time.dormant-days-high:90}")
+    private long dormantDaysHigh;
+
+    @Value("${rules.time.dormant-amount-threshold:300}")
+    private int dormantAmountThreshold;
+
+    @Value("${rules.time.dormant-days-moderate:180}")
+    private long dormantDaysModerate;
+
     // A04 — Round Number Amount
     @Value("${rules.amount.round-number-min:200}")
     private int roundNumberMin;
@@ -63,6 +87,13 @@ public class RuleConfig {
     public int getRapidSequentialMinVelocity() { return rapidSequentialMinVelocity; }
     public double getVelocitySpikeMultiplier() { return velocitySpikeMultiplier; }
     public long getVelocitySpikeMin30DTransactions() { return velocitySpikeMin30DTransactions; }
+    public int getNightStartHour() { return nightStartHour; }
+    public int getNightEndHour() { return nightEndHour; }
+    public long getRapidSequentialHighSeconds() { return rapidSequentialHighSeconds; }
+    public long getRapidSequentialModerateSeconds() { return rapidSequentialModerateSeconds; }
+    public long getDormantDaysHigh() { return dormantDaysHigh; }
+    public int getDormantAmountThreshold() { return dormantAmountThreshold; }
+    public long getDormantDaysModerate() { return dormantDaysModerate; }
     public int getRoundNumberMin() { return roundNumberMin; }
     public int getRoundNumberHighMin() { return roundNumberHighMin; }
     public double getMicroChargeMax() { return microChargeMax; }
