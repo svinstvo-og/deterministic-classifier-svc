@@ -35,6 +35,7 @@ public class Transaction {
     private Integer velocity24H;
     private Boolean isNight;
     private Long secondsSinceLastTransaction;
+    private Integer authenticationFlag;
 
     public static Transaction fromDto(CreditTransactionDto dto) {
         return new TransactionBuilder()
@@ -49,6 +50,7 @@ public class Transaction {
                 .velocity24H(dto.velocity24H())
                 .isNight(dto.isNight())
                 .secondsSinceLastTransaction(dto.secondsSinceLastTransaction())
+                .authenticationFlag(dto.authenticationFlag())
                 .build();
     }
 }
