@@ -10,6 +10,12 @@ spring:
       auto-offset-reset: earliest
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+classification:
+  output-topic: deterministic-classification
 
 server:
   port: 8085
